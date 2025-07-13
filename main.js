@@ -1,19 +1,24 @@
-// Función para abrir el modal (para usar con onclick)
+// Función para abrir el modal
 function openModal(workshopType) {
     const modal = document.getElementById('workshop-modal');
     if (modal) {
+        // Actualiza el contenido del modal según el taller
         updateModalContent(workshopType);
+        // Muestra el modal añadiendo la clase active
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Previene el scroll del body
+        // Previene el scroll del body
+        document.body.style.overflow = 'hidden';
     }
 }
 
-// Función para cerrar el modal (para usar con onclick si lo necesitas)
+// Función para cerrar el modal
 function closeModal() {
     const modal = document.getElementById('workshop-modal');
     if (modal) {
+        // Oculta el modal quitando la clase active
         modal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Restaura el scroll
+        // Restaura el scroll
+        document.body.style.overflow = 'auto';
     }
 }
 
@@ -75,97 +80,3 @@ function updateModalContent(workshopType) {
             ]
         },
         'habilidades-socioemocionales': {
-            title: 'Habilidades Socioemocionales',
-            audience: 'Niños, niñas y adolescentes',
-            duration: 'Sesiones de 60 minutos, frecuencia semanal',
-            description: '<p>Desarrollamos competencias para gestionar emociones, resolver conflictos y fortalecer la autoestima.</p><p>Creamos un espacio seguro donde expresar y comprender las emociones.</p>',
-            benefits: [
-                'Mejora de la inteligencia emocional',
-                'Desarrollo de habilidades para resolver conflictos',
-                'Fortalecimiento de la autoestima',
-                'Mejora de las relaciones interpersonales'
-            ]
-        },
-        'asesoramiento-instituciones': {
-            title: 'Asesoramiento a Instituciones',
-            audience: 'Escuelas y centros educativos',
-            duration: 'Consultoría personalizada según necesidades',
-            description: '<p>Ofrecemos consultoría en adaptaciones curriculares, estrategias de inclusión y abordaje de necesidades específicas.</p><p>Trabajamos con el equipo docente para implementar estrategias efectivas.</p>',
-            benefits: [
-                'Desarrollo de estrategias de inclusión',
-                'Adaptaciones curriculares personalizadas',
-                'Capacitación a equipos docentes',
-                'Acompañamiento en la implementación de programas'
-            ]
-        }
-    };
-    
-    if (workshopData[workshopType]) {
-        const data = workshopData[workshopType];
-        
-        modalTitle.textContent = data.title;
-        modalAudience.textContent = data.audience;
-        modalDuration.textContent = data.duration;
-        modalDescription.innerHTML = data.description;
-        
-        // Limpiar y actualizar lista de beneficios
-        benefitsList.innerHTML = '';
-        data.benefits.forEach(benefit => {
-            const li = document.createElement('li');
-            li.textContent = benefit;
-            benefitsList.appendChild(li);
-        });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Navegación suave
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Configurar el cierre del modal
-    const closeModalBtn = document.querySelector('.close-modal');
-    const modal = document.getElementById('workshop-modal');
-    
-    if (closeModalBtn && modal) {
-        closeModalBtn.addEventListener('click', function() {
-            closeModal();
-        });
-        
-        // Cerrar modal al hacer clic fuera del contenido
-        window.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    }
-    
-    // Manejo del formulario de contacto
-    const contactForm = document.getElementById('contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Aquí iría la lógica para enviar el formulario
-            // Por ahora solo mostramos un mensaje de éxito simulado
-            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-            contactForm.reset();
-        });
-    }
-});

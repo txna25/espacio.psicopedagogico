@@ -1,65 +1,127 @@
-// Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
-    // Navegación suave al hacer clic en los enlaces del menú
-    const navLinks = document.querySelectorAll('.main-nav a, .footer-links a');
+    // Navegación suave
+    const links = document.querySelectorAll('a[href^="#"]');
     
-    navLinks.forEach(link => {
+    links.forEach(link => {
         link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
+            e.preventDefault();
             
-            // Verificar si el enlace es un ancla
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                
-                const targetId = href;
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // Calcular la posición de desplazamiento considerando el header fijo
-                    const headerHeight = document.querySelector('.site-header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    // Desplazamiento suave
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
             }
         });
     });
     
-    // Formulario de contacto
+    // Manejo de modales para talleres
+    const workshopLinks = document.querySelectorAll('.workshop-footer');
+    const modal = document.getElementById('workshop-modal');
+    const closeModal = document.querySelector('.close-modal');
+    
+    if (modal && closeModal) {
+        workshopLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const workshopType = this.getAttribute('data-workshop');
+                updateModalContent(workshopType);
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+    
+    // Actualizar contenido del modal según el taller seleccionado
+    function updateModalContent(workshopType) {
+        const modalTitle = document.getElementById('modal-title');
+        const modalAudience = document.getElementById('modal-audience');
+        const modalDuration = document.getElementById('modal-duration');
+        const modalDescription = document.querySelector('.modal-description');
+        const benefitsList = document.querySelector('.benefits-list');
+        
+        const workshopData = {
+            'apoyo-escolar': {
+                title: 'Apoyo Escolar Personalizado',
+                audience: 'Estudiantes de primaria y secundaria',
+                duration: 'Sesiones de 60 minutos, frecuencia a convenir',
+                description: '<p>Nuestro programa de apoyo escolar se adapta a las necesidades específicas de cada estudiante, reforzando contenidos escolares y desarrollando estrategias de aprendizaje efectivas.</p><p>Trabajamos en coordinación con la escuela para alinear objetivos y potenciar el rendimiento académico.</p>',
+                benefits: [
+                    'Mejora del rendimiento académico',
+                    'Desarrollo de autonomía en el estudio',
+                    'Aumento de la motivación y confianza',
+                    'Adquisición de métodos de estudio personalizados'
+                ]
+            },
+            'tecnicas-estudio': {
+                title: 'Técnicas de Estudio',
+                audience: 'Adolescentes y jóvenes',
+                duration: 'Sesiones de 60 minutos, frecuencia semanal',
+                description: '<p>Brindamos herramientas prácticas para optimizar el tiempo de estudio, mejorar la concentración y preparar exámenes de manera efectiva.</p><p>Adaptamos las técnicas al estilo de aprendizaje de cada estudiante para maximizar resultados.</p>',
+                benefits: [
+                    'Optimización del tiempo de estudio',
+                    'Mejora de la concentración y memoria',
+                    'Preparación efectiva para exámenes',
+                    'Reducción de la ansiedad académica'
+                ]
+            },
+            'estimulacion-cognitiva': {
+                title: 'Estimulación Cognitiva',
+                audience: 'Niños y niñas de 4 a 10 años',
+                duration: 'Sesiones de 45 minutos, frecuencia semanal',
+                description: '<p>A través de actividades lúdicas, potenciamos habilidades cognitivas fundamentales como atención, memoria, razonamiento y procesamiento de información.</p><p>Creamos un ambiente divertido donde el aprendizaje se convierte en juego.</p>',
+                benefits: [
+                    'Desarrollo de la atención sostenida',
+                    'Fortalecimiento de la memoria de trabajo',
+                    'Mejora del razonamiento lógico',
+                    'Estimulación del pensamiento creativo'
+                ]
+            }
+        };
+        
+        if (workshopData[workshopType]) {
+            const data = workshopData[workshopType];
+            
+            modalTitle.textContent = data.title;
+            modalAudience.textContent = data.audience;
+            modalDuration.textContent = data.duration;
+            modalDescription.innerHTML = data.description;
+            
+            // Limpiar y actualizar lista de beneficios
+            benefitsList.innerHTML = '';
+            data.benefits.forEach(benefit => {
+                const li = document.createElement('li');
+                li.textContent = benefit;
+                benefitsList.appendChild(li);
+            });
+        }
+    }
+    
+    // Manejo del formulario de contacto
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Obtener los valores del formulario
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Aquí puedes agregar código para enviar el formulario
-            // Por ejemplo, usando fetch API para enviar a un endpoint
-            
-            // Por ahora, solo mostraremos un mensaje de éxito simulado
+            // Aquí iría la lógica para enviar el formulario
+            // Por ahora solo mostramos un mensaje de éxito simulado
             alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
             contactForm.reset();
         });
     }
-    
-    // Efecto de header al hacer scroll
-    const header = document.querySelector('.site-header');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.style.padding = '10px 0';
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.padding = '15px 0';
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
-        }
-    });
 });

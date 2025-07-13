@@ -29,15 +29,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const workshopType = this.getAttribute('data-workshop');
                 updateModalContent(workshopType);
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Previene el scroll del body
             });
         });
         
         closeModal.addEventListener('click', function() {
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; // Restaura el scroll
         });
         
+        // Cerrar modal al hacer clic fuera del contenido
         window.addEventListener('click', function(e) {
             if (e.target === modal) {
                 modal.classList.remove('active');
@@ -89,6 +90,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Fortalecimiento de la memoria de trabajo',
                     'Mejora del razonamiento lógico',
                     'Estimulación del pensamiento creativo'
+                ]
+            },
+            'orientacion-familias': {
+                title: 'Orientación a Familias',
+                audience: 'Padres, madres y cuidadores',
+                duration: 'Sesiones de 60 minutos, frecuencia quincenal',
+                description: '<p>Brindamos asesoramiento para acompañar procesos educativos y mejorar desafíos en el aprendizaje desde casa.</p><p>Trabajamos en conjunto con las familias para crear estrategias efectivas de apoyo.</p>',
+                benefits: [
+                    'Herramientas para acompañar el proceso educativo',
+                    'Estrategias para manejar dificultades de aprendizaje',
+                    'Mejora de la comunicación familia-escuela',
+                    'Creación de rutinas y hábitos efectivos'
+                ]
+            },
+            'habilidades-socioemocionales': {
+                title: 'Habilidades Socioemocionales',
+                audience: 'Niños, niñas y adolescentes',
+                duration: 'Sesiones de 60 minutos, frecuencia semanal',
+                description: '<p>Desarrollamos competencias para gestionar emociones, resolver conflictos y fortalecer la autoestima.</p><p>Creamos un espacio seguro donde expresar y comprender las emociones.</p>',
+                benefits: [
+                    'Mejora de la inteligencia emocional',
+                    'Desarrollo de habilidades para resolver conflictos',
+                    'Fortalecimiento de la autoestima',
+                    'Mejora de las relaciones interpersonales'
+                ]
+            },
+            'asesoramiento-instituciones': {
+                title: 'Asesoramiento a Instituciones',
+                audience: 'Escuelas y centros educativos',
+                duration: 'Consultoría personalizada según necesidades',
+                description: '<p>Ofrecemos consultoría en adaptaciones curriculares, estrategias de inclusión y abordaje de necesidades específicas.</p><p>Trabajamos con el equipo docente para implementar estrategias efectivas.</p>',
+                benefits: [
+                    'Desarrollo de estrategias de inclusión',
+                    'Adaptaciones curriculares personalizadas',
+                    'Capacitación a equipos docentes',
+                    'Acompañamiento en la implementación de programas'
                 ]
             }
         };

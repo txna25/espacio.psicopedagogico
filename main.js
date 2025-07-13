@@ -80,3 +80,86 @@ function updateModalContent(workshopType) {
             ]
         },
         'habilidades-socioemocionales': {
+            title: 'Habilidades Socioemocionales',
+            audience: 'Niños, niñas y adolescentes',
+            duration: 'Sesiones de 60 minutos, frecuencia semanal',
+            description: '<p>Desarrollamos competencias para gestionar emociones, resolver conflictos y fortalecer la autoestima.</p><p>Creamos un espacio seguro donde expresar y comprender las emociones.</p>',
+            benefits: [
+                'Mejora de la inteligencia emocional',
+                'Desarrollo de habilidades para resolver conflictos',
+                'Fortalecimiento de la autoestima',
+                'Mejora de las relaciones interpersonales'
+            ]
+        },
+        'asesoramiento-instituciones': {
+            title: 'Asesoramiento a Instituciones',
+            audience: 'Escuelas y centros educativos',
+            duration: 'Consultoría personalizada según necesidades',
+            description: '<p>Ofrecemos consultoría en adaptaciones curriculares, estrategias de inclusión y abordaje de necesidades específicas.</p><p>Trabajamos con el equipo docente para implementar estrategias efectivas.</p>',
+            benefits: [
+                'Desarrollo de estrategias de inclusión',
+                'Adaptaciones curriculares personalizadas',
+                'Capacitación a equipos docentes',
+                'Acompañamiento en la implementación de programas'
+            ]
+        }
+    };
+    
+    if (workshopData[workshopType]) {
+        const data = workshopData[workshopType];
+        
+        modalTitle.textContent = data.title;
+        modalAudience.textContent = data.audience;
+        modalDuration.textContent = data.duration;
+        modalDescription.innerHTML = data.description;
+        
+        // Limpiar y actualizar lista de beneficios
+        benefitsList.innerHTML = '';
+        data.benefits.forEach(benefit => {
+            const li = document.createElement('li');
+            li.textContent = benefit;
+            benefitsList.appendChild(li);
+        });
+    }
+}
+
+// Configurar eventos cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', function() {
+    // Configurar el cierre del modal al hacer clic fuera del contenido
+    const modal = document.getElementById('workshop-modal');
+    if (modal) {
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Navegación suave
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Manejo del formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+            contactForm.reset();
+        });
+    }
+});

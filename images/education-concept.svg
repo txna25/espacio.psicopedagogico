@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo circular suave -->
+  <circle cx="200" cy="200" r="180" fill="#F8F9FA" stroke="#D6F0F9" stroke-width="8"/>
+  
+  <!-- Libro abierto -->
+  <path d="M100,240 L200,200 L300,240 L300,140 L200,100 L100,140 Z" fill="#FFDCE5" stroke="#333333" stroke-width="3"/>
+  <path d="M200,200 L200,100" stroke="#333333" stroke-width="3" fill="none"/>
+  <path d="M120,150 L180,130 M120,170 L180,150 M120,190 L180,170" stroke="#333333" stroke-width="2" fill="none"/>
+  <path d="M220,130 L280,150 M220,150 L280,170 M220,170 L280,190" stroke="#333333" stroke-width="2" fill="none"/>
+  
+  <!-- Lápiz -->
+  <path d="M160,260 L240,260 L240,280 L160,280 Z" fill="#FFF2C1" stroke="#333333" stroke-width="2"/>
+  <path d="M180,260 L180,240 L220,240 L220,260" fill="#FFF2C1" stroke="#333333" stroke-width="2"/>
+  <path d="M190,240 L190,220 L210,220 L210,240" fill="#9AE6B4" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Bombilla de idea -->
+  <circle cx="200" cy="180" r="25" fill="#FFE8D6" stroke="#333333" stroke-width="2"/>
+  <path d="M185,165 L215,195 M215,165 L185,195" stroke="#333333" stroke-width="2" fill="none"/>
+  
+  <!-- Estrellas decorativas -->
+  <path d="M120,100 L125,115 L140,115 L130,125 L135,140 L120,130 L105,140 L110,125 L100,115 L115,115 Z" fill="#E8DBFF"/>
+  <path d="M280,100 L285,115 L300,115 L290,125 L295,140 L280,130 L265,140 L270,125 L260,115 L275,115 Z" fill="#D6F0F9"/>
+  <path d="M200,60 L205,75 L220,75 L210,85 L215,100 L200,90 L185,100 L190,85 L180,75 L195,75 Z" fill="#FFDCE5"/>
+  
+  <!-- Pequeños círculos decorativos -->
+  <circle cx="150" cy="300" r="10" fill="#D6F0F9"/>
+  <circle cx="250" cy="300" r="10" fill="#FFDCE5"/>
+  <circle cx="200" cy="320" r="10" fill="#FFF2C1"/>
+</svg>

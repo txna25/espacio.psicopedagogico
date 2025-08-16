@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://espaciopsicopedagogico.com/sitemap.xml
+Sitemap: https://txna25.github.io/espacio.psicopedagogico/sitemap.xml
